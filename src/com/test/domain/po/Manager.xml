@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.ManagerDao">
+    <select id="findById" parameterType="int" resultType="Manager">
+        select * from Managers where id = #{id}
+    </select>
+    <select id="findAll" resultType="Manager">
+        select * from Managers
+    </select>
+    <select id="findByNumber" resultType="Manager">
+        SELECT * FROM  Managers WHERE number = #{number}
+    </select>
+
+
+    <insert id="insert" parameterType="Manager"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into Managers
+        values (null, #{number}, #{trueName})
+    </insert>
+
+    <!--<update id="update" parameterType="Manager">
+        update Managers set number = #{number}, trueName= #{trueName}
+        where id = #{id}
+    </update>
+
+    <delete id="delete" parameterType="int">
+        delete from Managers
+        where id = #{id}
+    </delete>-->
+</mapper>

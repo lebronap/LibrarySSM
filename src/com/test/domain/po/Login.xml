@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.LoginDao">
+    <select id="findByNumber" parameterType="int" resultType="Login">
+        select * from Login where number = #{number}
+    </select>
+
+    <insert id="addLogin" parameterType="Login"
+            useGeneratedKeys="true" keyProperty="id">
+            insert into Login
+            values (null, #{number}, 1234, 'member')
+    </insert>
+
+
+</mapper>

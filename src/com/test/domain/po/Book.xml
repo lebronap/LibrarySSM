@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.test.dao.BookDao">
+    <select id="findById" parameterType="int" resultType="Book">
+        select * from Books where id = #{id}
+    </select>
+    <select id="findAll" resultType="Book">
+        select * from Books
+    </select>
+    <select id="findByBookTitle" parameterType="string" resultType="Book">
+        select * from Books where bookTitle = #{bookTitle}
+    </select>
+    <select id="findByBookNum" parameterType="int" resultType="Book">
+        select * from Books where bookNum = #{bookNum}
+    </select>
+
+    <select id="findByBookNum1" parameterType="int" resultType="Book">
+        select * from Books where bookNum = #{bookNum}
+    </select>
+
+
+    <select id="findByAuthor" parameterType="string" resultType="Book">
+        select * from Books where author = #{author}
+    </select>
+    <select id="findByTypeX" parameterType="string" resultType="Book">
+        select * from Books where typeX = #{typeX}
+    </select>
+    <select id="findByPress" parameterType="string" resultType="Book">
+        select * from Books where press = #{press}
+    </select>
+
+    <insert id="addBookInfo" parameterType="Book"
+            useGeneratedKeys="true" keyProperty="id">
+        insert into Books
+        values (null, #{bookTitle}, #{bookNum}, #{author}, #{press}, #{describeX}, #{address}, #{typeX})
+    </insert>
+
+    <update id="updateBookByNumber" parameterType="Book">
+        update Books set bookTitle = #{bookTitle}, bookNum= #{bookNum}, author= #{author}, press= #{press}, describeX= #{describeX}, address= #{address}, typeX= #{typeX}
+        where bookNum = #{bookNum}
+    </update>
+
+    <update id="updateBookById" parameterType="Book">
+        update Books set bookTitle = #{bookTitle}, bookNum= #{bookNum}, author= #{author}, press= #{press}, describeX= #{describeX}, address= #{address}, typeX= #{typeX}
+        where id = #{id}
+    </update>
+
+
+    <!--<update id="updateBookById" parameterTypeX="Book">
+        update Books set bookTitle = #{book.}, bookNum= #{book.bookNum}, author= #{book.author}, press= #{book.press}, describeX= #{describeX}, address= #{address}, typeX= #{typeX}
+        where id = #{id}
+    </update>-->
+
+    <delete id="deleteBookByNumber" parameterType="int">
+        delete from Books
+        where bookNum = #{bookNum}
+    </delete>
+
+    <delete id="deleteBookById" parameterType="int">
+        delete from Books
+        where id = #{id}
+    </delete>
+</mapper>

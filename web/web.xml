@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd"
+         version="3.1">
+
+    <!--<welcome-file-list>
+        <welcome-file>/WEB-INF/pages/index.jsp</welcome-file>
+    </welcome-file-list>-->
+
+
+    <!-- 配置声明Spring总控整个WebApp -->
+    <!--
+        WebApp 启动后， 首先加载并获取的上下文的参数
+        指定Spring 整体配置文件的名称和位置, 默认WEB-INF\applicationContext.xml
+        为：Spring 系统上下文监听器 ContextLoaderListener
+    -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath*:spring-config.xml    <!-- 在src及src下的子文件夹中查询指定的文件 -->
+        </param-value>
+    </context-param>
+    <!--
+        指定 Spring 系统上下文监听器 ContextLoaderListener
+    -->
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+
+
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>*.css</url-pattern>
+        <url-pattern>*.html</url-pattern>
+        <url-pattern>*.js</url-pattern>
+        <url-pattern>*.jpg</url-pattern>
+        <url-pattern>*.png</url-pattern>
+        <url-pattern>/images/*</url-pattern>
+        <url-pattern>/fonts/*</url-pattern>
+
+    </servlet-mapping>
+
+
+    <!-- 配置Spring MVC, 指明Spring MVC 核心控制器|总控Servlet以及其配置文件， 借助配置 servlet 标签实现 -->
+    <servlet>
+        <servlet-name>dispatcherServlet</servlet-name>
+        <!-- 声明核心控制器 -->
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <!-- 指明Spring MVC的配置文件的名称和位置, 默认 WEB-INF/<servlet-name>-servlet.xml -->
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>classpath*:spring-config.xml</param-value> <!-- 在src及src下的子文件夹中查询指定的文件 -->
+        </init-param>
+        <load-on-startup>1</load-on-startup>    <!-- WebApp 启动后， 自动执行 -->
+
+
+        <!--<async-supported>true</async-supported>-->
+
+    </servlet>
+    <!-- 指明具体的url将被Spring MVC 控制==被核心控制器拦截并处理 -->
+
+    <servlet-mapping>
+
+        <servlet-name>dispatcherServlet</servlet-name>
+       <!-- <url-pattern>*.css</url-pattern>-->
+
+        <url-pattern>/</url-pattern>
+
+        <!--<servlet-name>dispatcher</servlet-name>
+        &lt;!&ndash;
+            1 = *.xxx == *.action|*.html, 不推荐-restful
+            2 = / 拦截所有(js中url)的访问， 不拦截*.jsp， ===推荐
+            3 = /* 拦截所有的url， 包括*.jsp， 不推荐
+        &ndash;&gt;
+
+        <url-pattern>/</url-pattern>-->
+    </servlet-mapping>
+</web-app>
+
